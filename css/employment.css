@@ -1,0 +1,521 @@
+/* Employment page */
+
+.employment-hero {
+  position: relative;
+  display: grid;
+  min-height: 520px;
+  place-items: center;
+  padding: 75px 0;
+  overflow: hidden;
+  background: var(--navy);
+  color: var(--white);
+  text-align: center;
+  isolation: isolate;
+}
+
+.employment-hero-background {
+  position: absolute;
+  inset: -15%;
+  z-index: -2;
+  background: url("../images/cybersecurity-hero.jpeg") center / cover no-repeat;
+  transform: translate3d(0, 0, 0);
+  will-change: transform;
+}
+
+.employment-hero::after {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(rgba(7, 22, 68, 0.88), rgba(7, 22, 68, 0.76));
+  content: "";
+}
+
+.employment-hero-content {
+  position: relative;
+  z-index: 1;
+  max-width: 900px;
+}
+
+.employment-hero h1 {
+  color: var(--white);
+  font-size: clamp(2.3rem, 6vw, 4.7rem);
+  text-shadow: 0 3px 9px rgba(0, 0, 0, 0.7);
+}
+
+.employment-hero p:not(.eyebrow) {
+  max-width: 70ch;
+  margin-inline: auto;
+  font-size: clamp(1rem, 2vw, 1.2rem);
+}
+
+.employment-hero-actions,
+.employment-apply-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 14px;
+  margin-top: 28px;
+}
+
+.employment-intro,
+.employment-track,
+.employment-expectations,
+.employment-apply {
+  padding: clamp(60px, 8vw, 95px) 0;
+}
+
+.employment-intro {
+  text-align: center;
+}
+
+.employment-intro > .content-container > p:not(.eyebrow),
+.track-heading p:not(.eyebrow),
+.employment-apply > .content-container > p:not(.eyebrow) {
+  max-width: 72ch;
+  margin-inline: auto;
+}
+
+.career-path-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 28px;
+  margin-top: 40px;
+}
+
+.career-path-card {
+  position: relative;
+  padding: 38px;
+  overflow: hidden;
+  border-top: 5px solid var(--gold);
+  border-radius: var(--radius);
+  background: var(--white);
+  box-shadow: var(--shadow);
+  color: var(--text);
+  text-align: left;
+  text-decoration: none;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.career-path-card:hover {
+  color: var(--text);
+  transform: translateY(-6px);
+  box-shadow: 0 18px 38px rgba(7, 22, 68, 0.2);
+}
+
+.career-path-card h3 {
+  position: relative;
+  margin-bottom: 14px;
+  color: var(--navy);
+  font-size: clamp(1.45rem, 3vw, 2rem);
+}
+
+.career-path-number {
+  position: absolute;
+  top: 8px;
+  right: 18px;
+  color: rgba(7, 22, 68, 0.07);
+  font-family: "Times New Roman", Times, serif;
+  font-size: 6rem;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.career-path-link {
+  color: var(--blue);
+  font-weight: 800;
+}
+
+.employment-track {
+  scroll-margin-top: 20px;
+  background: var(--surface);
+}
+
+.employment-track-dark {
+  background: var(--navy);
+  color: var(--white);
+}
+
+.employment-track-dark h2 {
+  color: var(--gold);
+}
+
+.track-heading {
+  max-width: 850px;
+  margin: 0 auto 42px;
+  text-align: center;
+}
+
+.job-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 26px;
+}
+
+.job-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: 470px;
+  padding: clamp(28px, 4vw, 42px);
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  border-radius: var(--radius);
+  background-color: var(--navy);
+  background-image:
+    linear-gradient(rgba(7, 22, 68, 0.83), rgba(7, 22, 68, 0.76)),
+    var(--job-image);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  box-shadow: var(--shadow);
+  color: var(--white);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.job-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 42px rgba(7, 22, 68, 0.3);
+}
+
+.law-transport-card {
+  --job-image: url("../images/optimized/security-detail.webp");
+}
+.law-personal-card{
+  --job-image: url("../images/optimized/security-guard.webp");
+}
+.law-event-card {
+  --job-image: url("../images/optimized/law-event-security.webp");
+}
+.law-organization-card {
+  --job-image: url("../images/optimized/law-organization.webp");
+}
+.general-personal-card {
+   --job-image: url("../images/optimized/schedule.webp");
+}
+.general-transport-card {
+  --job-image: url("../images/optimized/general-transport.webp");
+}
+.general-event-card {
+  --job-image: url("../images/optimized/general-event.webp");
+}
+.general-organization-card {
+  --job-image: url("../images/optimized/general-school.webp");
+}
+
+/* Priority airport-security opening */
+
+.priority-opening {
+  position: relative;
+  max-width: 1000px;
+  margin: 0 auto 45px;
+  padding: clamp(30px, 5vw, 50px);
+  overflow: hidden;
+  border: 5px solid var(--gold);
+  border-radius: var(--radius);
+
+  background:
+    linear-gradient(
+      rgba(7, 22, 68, 0.66),
+      rgba(7, 22, 68, 0.58)
+    ),
+    url("../images/optimized/airport.webp")
+    center / cover no-repeat;
+
+  box-shadow:
+    0 20px 45px rgba(0, 0, 0, 0.3);
+
+  color: var(--white);
+}
+
+.priority-opening {
+  position: relative;
+  z-index: 1;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.priority-opening:hover {
+  z-index: 5;
+  transform: scale(1.05);
+  box-shadow: 0 14px 30px rgba(7, 22, 68, 0.3);
+}
+
+.priority-opening-content {
+  position: relative;
+  z-index: 1;
+}
+
+.priority-label {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 8px 14px;
+  border-radius: 999px;
+  background: var(--gold);
+  color: var(--navy);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.priority-opening .eyebrow {
+  margin-bottom: 8px;
+  color: var(--gold);
+}
+
+.priority-opening h3 {
+  max-width: 750px;
+  margin-bottom: 18px;
+  color: var(--white);
+  font-size: clamp(1.65rem, 4vw, 2.5rem);
+  text-shadow:
+    0 2px 6px rgba(0, 0, 0, 0.75);
+}
+
+.priority-opening h3,
+.priority-opening-content > p {
+  text-shadow:
+    0 2px 6px rgba(0, 0, 0, 0.9);
+}
+
+.priority-opening > p,
+.priority-opening-content > p {
+  max-width: 78ch;
+}
+
+.priority-opening-details {
+  display: grid;
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+  gap: 30px;
+  margin-top: 30px;
+}
+
+.priority-opening-details > div {
+  padding: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  border-radius: var(--radius);
+  background: rgba(7, 22, 68, 0.66);
+  backdrop-filter: blur(4px);
+}
+
+.priority-opening-details h4 {
+  margin: 0 0 14px;
+  color: var(--gold);
+  font-size: 1.05rem;
+}
+
+.priority-opening-details ul {
+  display: grid;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.priority-opening-details li {
+  position: relative;
+  margin: 0;
+  padding-left: 24px;
+}
+
+.priority-opening-details li::before {
+  position: absolute;
+  top: 0.58em;
+  left: 2px;
+  width: 8px;
+  height: 8px;
+  background: var(--gold);
+  content: "";
+  transform: rotate(45deg);
+}
+
+.priority-opening-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 30px;
+}
+
+.priority-opening-note {
+  margin: 24px 0 0;
+  padding-top: 18px;
+  border-top:
+    1px solid rgba(255, 255, 255, 0.25);
+  color: rgba(255, 255, 255, 0.82);
+  font-size: 0.82rem;
+}
+
+@media (max-width: 768px) {
+  .priority-opening-details {
+    grid-template-columns: 1fr;
+  }
+
+  .priority-label {
+    position: static;
+    display: inline-block;
+    margin-bottom: 20px;
+  }
+}
+
+@media (max-width: 520px) {
+  .priority-opening {
+    padding: 28px 22px;
+  }
+
+  .priority-opening-details > div {
+    padding: 21px 18px;
+  }
+
+  .priority-opening-actions {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .priority-opening-actions .button {
+    width: 100%;
+  }
+}
+
+.job-category {
+  align-self: flex-start;
+  display: inline-block;
+  margin-bottom: 14px;
+  padding: 7px 12px;
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  border-radius: 999px;
+  background: rgba(7, 22, 68, 0.82);
+  color: var(--gold);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  backdrop-filter: blur(4px);
+}
+
+.job-card h3 {
+  margin-bottom: 14px;
+  color: var(--white);
+  font-size: clamp(1.3rem, 2.3vw, 1.7rem);
+  text-shadow: 0 2px 5px rgba(0, 0, 0, 0.75);
+}
+
+.job-card h4 {
+  margin: 24px 0 10px;
+  color: var(--gold);
+  font-size: 1rem;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.75);
+}
+
+.job-card p,
+.job-card li {
+  color: var(--white);
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.8);
+}
+
+.job-card ul,
+.expectations-list {
+  display: grid;
+  gap: 9px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.job-card li,
+.expectations-list li {
+  position: relative;
+  margin: 0;
+  padding-left: 24px;
+  font-family: "Times New Roman", Times, serif;
+}
+
+.job-card li::before,
+.expectations-list li::before {
+  position: absolute;
+  top: 0.58em;
+  left: 2px;
+  width: 8px;
+  height: 8px;
+  background: var(--gold);
+  content: "";
+  transform: rotate(45deg);
+}
+
+.employment-expectations {
+  background: var(--light-blue);
+}
+
+.expectations-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: clamp(35px, 7vw, 80px);
+}
+
+.expectations-list {
+  padding: 30px;
+  border-radius: var(--radius);
+  background: var(--white);
+  box-shadow: var(--shadow);
+}
+
+.employment-apply {
+  background: var(--gold);
+  text-align: center;
+}
+
+.employment-apply h2 {
+  color: var(--navy);
+}
+
+.employment-disclaimer {
+  margin-top: 25px !important;
+  color: #463a19;
+  font-size: 0.87rem;
+}
+
+.application-instructions-button {
+  border: 2px solid var(--navy);
+}
+
+@media (max-width: 768px) {
+  .employment-hero {
+    min-height: 470px;
+    padding: 60px 0;
+  }
+
+  .employment-hero-background {
+    inset: -12%;
+  }
+
+  .career-path-grid,
+  .job-grid,
+  .expectations-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 520px) {
+  .employment-hero-actions,
+  .employment-apply-actions {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .employment-hero-actions .button,
+  .employment-apply-actions .button {
+    width: 100%;
+  }
+
+  .career-path-card,
+  .job-card {
+    padding: 26px 22px;
+  }
+}
+
+@media (hover: none) {
+  .priority-opening:hover {
+    transform: none;
+  }
+}
