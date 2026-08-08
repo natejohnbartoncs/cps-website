@@ -65,67 +65,65 @@
 
   <div id="wrapper">
     <!-- Header -->
-    <header class="site-header">
-      <a
-        class="brand"
-        href="index.html"
-        aria-label="Colorado Protective Services home"
-      >
-        <img
-          class="header-badge"
-          src="images/badge.png"
-          alt=""
-          aria-hidden="true"
-        >
-
-        <span class="company-name">
-          Colorado Protective Services
-        </span>
-      </a>
-
-      <button
-        class="nav-toggle"
-        type="button"
-        aria-expanded="false"
-        aria-controls="primary-navigation"
-      >
-        <span
-          class="nav-toggle-icon"
-          aria-hidden="true"
-        ></span>
-
-        <span class="menu-label">
-          Menu
-        </span>
-      </button>
-    </header>
-
-    <!-- Navigation -->
-    <nav
-      id="primary-navigation"
-      class="primary-navigation"
-      aria-label="Primary navigation"
+    <!-- Unified header and navigation -->
+<header class="site-header">
+  <a
+    class="brand"
+    href="index.html"
+    aria-label="Colorado Protective Services home"
+  >
+    <img
+      class="header-badge"
+      src="images/badge.png"
+      alt=""
+      aria-hidden="true"
     >
-      <a href="index.html">
-        Home
-      </a>
 
-      <a
-        href="company.html"
-        aria-current="page"
-      >
-        Company
-      </a>
+    <span class="company-name">
+      Colorado Protective Services
+    </span>
+  </a>
 
-      <a href="employment.html">
-        Employment
-      </a>
+  <button
+    class="nav-toggle"
+    type="button"
+    aria-expanded="false"
+    aria-controls="primary-navigation"
+  >
+    <span
+      class="nav-toggle-icon"
+      aria-hidden="true"
+    ></span>
 
-      <a href="contact.html">
-        Contact
-      </a>
-    </nav>
+    <span class="menu-label">
+      Menu
+    </span>
+  </button>
 
+  <nav
+    id="primary-navigation"
+    class="primary-navigation"
+    aria-label="Primary navigation"
+  >
+    <a
+      href="index.html"
+    >
+      Home
+    </a>
+
+    <a href="company.html" aria-current="page">
+      Company
+    </a>
+
+    <a href="employment.html">
+      Employment
+    </a>
+
+    <a href="contact.html">
+      Contact
+    </a>
+  </nav>
+</header>
     <main id="main-content">
       <!-- Page introduction -->
       <!-- Company hero -->
@@ -601,5 +599,116 @@ if (!prefersReducedMotion) {
       "#copyright-year"
     ).textContent = new Date().getFullYear();
   </script>
+
+<script>
+  /*
+   * Expandable leadership biographies
+   */
+  const biographies =
+    document.querySelectorAll(".founder-biography");
+
+  biographies.forEach((biography, index) => {
+    const biographyChildren =
+      Array.from(biography.children);
+
+    /*
+     * Find the first main paragraph, excluding the eyebrow.
+     */
+    const introduction =
+      biographyChildren.find((element) =>
+        element.matches("p:not(.eyebrow)")
+      );
+
+    if (!introduction) {
+      return;
+    }
+
+    /*
+     * Collect everything appearing after the introduction.
+     */
+    const extraContent = [];
+    let nextElement =
+      introduction.nextElementSibling;
+
+    while (nextElement) {
+      const elementToMove = nextElement;
+
+      nextElement =
+        nextElement.nextElementSibling;
+
+      extraContent.push(elementToMove);
+    }
+
+    if (extraContent.length === 0) {
+      return;
+    }
+
+    /*
+     * Create the expandable content container.
+     */
+    const expandedContent =
+      document.createElement("div");
+
+    expandedContent.className =
+      "biography-more is-collapsed";
+
+    expandedContent.id =
+      `biography-more-${index + 1}`;
+
+    extraContent.forEach((element) => {
+      expandedContent.appendChild(element);
+    });
+
+    /*
+     * Create the Show more button.
+     */
+    const toggleButton =
+      document.createElement("button");
+
+    toggleButton.className =
+      "biography-toggle";
+
+    toggleButton.type = "button";
+    toggleButton.textContent = "Show more";
+
+    toggleButton.setAttribute(
+      "aria-expanded",
+      "false"
+    );
+
+    toggleButton.setAttribute(
+      "aria-controls",
+      expandedContent.id
+    );
+
+    biography.appendChild(expandedContent);
+    biography.appendChild(toggleButton);
+
+    /*
+     * Expand or collapse this biography.
+     */
+    toggleButton.addEventListener("click", () => {
+      const isExpanded =
+        toggleButton.getAttribute(
+          "aria-expanded"
+        ) === "true";
+
+      toggleButton.setAttribute(
+        "aria-expanded",
+        String(!isExpanded)
+      );
+
+      expandedContent.classList.toggle(
+        "is-collapsed",
+        isExpanded
+      );
+
+      toggleButton.textContent =
+        isExpanded
+          ? "Show more"
+          : "Show less";
+    });
+  });
+</script>
 </body>
 </html>

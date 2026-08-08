@@ -1,8 +1,7 @@
 /* ======================================================
    COMPANY PAGE
-   ====================================================== */
+====================================================== */
 
-/* Page introduction */
 /* Company hero */
 
 .company-introduction {
@@ -22,9 +21,7 @@
   position: absolute;
   inset: -15%;
   z-index: -2;
-  background:
-    url("../images/leader.jpeg")
-    center / cover no-repeat;
+  background: url("../images/leader.jpeg") center / cover no-repeat;
   transform: translate3d(0, 0, 0);
   will-change: transform;
 }
@@ -33,11 +30,10 @@
   position: absolute;
   inset: 0;
   z-index: -1;
-  background:
-    linear-gradient(
-      rgba(7, 22, 68, 0.76),
-      rgba(7, 22, 68, 0.66)
-    );
+  background: linear-gradient(
+    rgba(7, 22, 68, 0.76),
+    rgba(7, 22, 68, 0.66)
+  );
   content: "";
 }
 
@@ -68,7 +64,8 @@
   line-height: 1.8;
   text-shadow: 0 2px 5px rgba(0, 0, 0, 0.75);
 }
-/* Founder section */
+
+/* Founder and leadership sections */
 
 .company-founder {
   padding: clamp(70px, 9vw, 115px) 0;
@@ -77,9 +74,7 @@
 
 .founder-layout {
   display: grid;
-  grid-template-columns:
-    minmax(280px, 430px)
-    minmax(0, 1fr);
+  grid-template-columns: minmax(280px, 430px) minmax(0, 1fr);
   align-items: center;
   gap: clamp(45px, 8vw, 95px);
 }
@@ -283,8 +278,7 @@
 
 .company-principles-grid {
   display: grid;
-  grid-template-columns:
-    repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 25px;
 }
 
@@ -335,6 +329,115 @@
   line-height: 1.75;
 }
 
+/* ======================================================
+   Expandable leadership biographies
+====================================================== */
+
+.biography-more {
+  position: relative;
+  margin-top: 20px;
+}
+
+.biography-more > p {
+  margin-bottom: 19px;
+  line-height: 1.85;
+}
+
+/*
+ * Collapsed text remains partially visible and fades
+ * toward the Show more button.
+ */
+.biography-more.is-collapsed {
+  max-height: 135px;
+  overflow: hidden;
+
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    #000 0%,
+    #000 35%,
+    rgba(0, 0, 0, 0.7) 60%,
+    transparent 100%
+  );
+
+  mask-image: linear-gradient(
+    to bottom,
+    #000 0%,
+    #000 35%,
+    rgba(0, 0, 0, 0.7) 60%,
+    transparent 100%
+  );
+}
+
+/* Show more / Show less button */
+
+.biography-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 13px;
+  width: 100%;
+  min-height: 54px;
+  margin-top: 5px;
+  padding: 12px 22px;
+  border: 2px solid var(--navy);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--navy);
+  font: inherit;
+  font-weight: 800;
+  cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.biography-toggle:hover,
+.biography-toggle:focus-visible {
+  background: var(--navy);
+  color: var(--white);
+}
+
+.biography-toggle:focus-visible {
+  outline: 3px solid rgba(212, 175, 55, 0.45);
+  outline-offset: 3px;
+}
+
+/* Downward arrow */
+
+.biography-toggle::after {
+  width: 10px;
+  height: 10px;
+  border-right: 3px solid currentColor;
+  border-bottom: 3px solid currentColor;
+  content: "";
+  transform: translateY(-3px) rotate(45deg);
+  transition: transform 0.25s ease;
+}
+
+/* Arrow points upward when expanded */
+
+.biography-toggle[aria-expanded="true"]::after {
+  transform: translateY(3px) rotate(225deg);
+}
+
+@media (max-width: 520px) {
+  .biography-more.is-collapsed {
+    max-height: 155px;
+  }
+
+  .biography-toggle {
+    min-height: 52px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .biography-toggle,
+  .biography-toggle::after {
+    transition: none;
+  }
+}
+
 /* Responsive layout */
 
 @media (max-width: 850px) {
@@ -370,20 +473,13 @@
 
 @media (max-width: 520px) {
   .company-introduction {
-    min-height: 460px;
+    min-height: 410px;
     padding: 65px 0;
   }
 
   .company-hero-background {
     inset: -10%;
     background-position: center;
-  }
-}
-
-@media (max-width: 520px) {
-  .company-introduction {
-    min-height: 410px;
-    padding: 65px 0;
   }
 
   .company-founder,
