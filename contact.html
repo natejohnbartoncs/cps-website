@@ -37,16 +37,17 @@
   <a class="skip-link" href="#main-content">Skip to main content</a>
 
   <div id="wrapper">
-    <header class="site-header">
+    <!-- Unified header and navigation -->
+<header class="site-header">
   <a
     class="brand"
     href="index.html"
     aria-label="Colorado Protective Services home"
   >
     <img
+      class="header-badge"
       src="images/badge.png"
       alt=""
-      class="header-badge"
       aria-hidden="true"
     >
 
@@ -61,32 +62,40 @@
     aria-expanded="false"
     aria-controls="primary-navigation"
   >
-    <span class="nav-toggle-icon" aria-hidden="true"></span>
-    <span class="menu-label">Menu</span>
+    <span
+      class="nav-toggle-icon"
+      aria-hidden="true"
+    ></span>
+
+    <span class="menu-label">
+      Menu
+    </span>
   </button>
-</header>
-    
-<nav
-  id="primary-navigation"
-  class="primary-navigation"
-  aria-label="Primary navigation"
->
-  <a href="index.html">Home</a>
 
- 
- 
-  <a href="company.html">
-      Company
-  </a>
- 
-  <a
-    href="employment.html"
+  <nav
+    id="primary-navigation"
+    class="primary-navigation"
+    aria-label="Primary navigation"
   >
-    Employment
-  </a>
+    <a
+      href="index.html"
+    >
+      Home
+    </a>
 
-  <a href="contact.html"aria-current="page">Contact</a>
-</nav>
+    <a href="company.html">
+      Company
+    </a>
+
+    <a href="employment.html">
+      Employment
+    </a>
+
+    <a href="contact.html" aria-current="page">
+      Contact
+    </a>
+  </nav>
+</header>
 
 
     <main id="main-content">

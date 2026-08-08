@@ -110,25 +110,34 @@ p {
   transform: translateY(0);
 }
 
-/* Header and navigation */
+/* Unified header and navigation */
+
 .site-header {
   position: relative;
-  display: flex;
+  z-index: 100;
+  display: grid;
+  grid-template-columns:
+    minmax(320px, auto)
+    minmax(0, 1fr);
   align-items: center;
-  justify-content: center;
-  min-height: 112px;
-  padding: 18px max(1rem, calc((100% - var(--content-width)) / 2));
+  gap: clamp(25px, 5vw, 70px);
+  min-height: 92px;
+  padding:
+    14px
+    max(
+      1rem,
+      calc((100% - var(--content-width)) / 2)
+    );
   background: var(--navy);
 }
 
 .brand {
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 18px;
-  max-width: min(950px, calc(100% - 190px));
+  gap: 14px;
+  min-width: 0;
   color: var(--white);
-  text-align: center;
+  text-align: left;
   text-decoration: none;
 }
 
@@ -138,26 +147,79 @@ p {
 
 .header-badge {
   flex: 0 0 auto;
-  width: 88px;
-  max-height: 96px;
+  width: 62px;
+  max-height: 70px;
   object-fit: contain;
 }
 
 .company-name {
   color: inherit;
   font-family: "Times New Roman", Times, serif;
-  font-size: clamp(1.4rem, 2.8vw, 3.0rem);
+  font-size: clamp(1.15rem, 2vw, 1.7rem);
   font-weight: 800;
-  line-height: 1;
+  line-height: 1.05;
   letter-spacing: 0.025em;
   text-transform: uppercase;
 }
 
-.nav-toggle {
+.primary-navigation {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: clamp(0.5rem, 2vw, 2rem);
+  min-height: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+}
+
+.primary-navigation a {
+  position: relative;
+  display: inline-block;
+  padding: 13px 7px;
+  color: var(--white);
+  font-weight: 700;
+  text-decoration: none;
+  white-space: nowrap;
+  transition:
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.primary-navigation a:hover,
+.primary-navigation a:focus-visible,
+.primary-navigation a[aria-current="page"] {
+  color: var(--gold);
+}
+
+.primary-navigation a::after {
   position: absolute;
-  right: 16px;
+  right: 7px;
+  bottom: 6px;
+  left: 7px;
+  height: 3px;
+  border-radius: 999px;
+  background: var(--gold);
+  content: "";
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 0.2s ease;
+}
+
+.primary-navigation a:hover::after,
+.primary-navigation a:focus-visible::after,
+.primary-navigation a[aria-current="page"]::after {
+  transform: scaleX(1);
+}
+
+.primary-navigation a[aria-current="page"] {
+  box-shadow: none;
+}
+
+.nav-toggle {
   display: none;
   align-items: center;
+  justify-content: center;
   gap: 8px;
   padding: 9px 12px;
   border: 1px solid rgba(255, 255, 255, 0.65);
@@ -195,36 +257,6 @@ p {
 
 .nav-toggle-icon::after {
   top: 6px;
-}
-
-.primary-navigation {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: clamp(0.4rem, 2.8vw, 2.5rem);
-  min-height: 58px;
-  padding: 8px 1rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.22);
-  background: var(--navy);
-}
-
-.primary-navigation a {
-  display: inline-block;
-  padding: 9px 7px;
-  color: var(--white);
-  font-weight: 700;
-  text-decoration: none;
-  transition: color 0.2s ease, transform 0.2s ease;
-}
-
-.primary-navigation > a:hover,
-.primary-navigation .dropdown > a:hover,
-.primary-navigation a[aria-current="page"] {
-  color: var(--gold);
-}
-
-.primary-navigation a[aria-current="page"] {
-  box-shadow: inset 0 -3px var(--gold);
 }
 
 .dropdown {
@@ -1393,58 +1425,66 @@ p {
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 900px) {
   .site-header {
-    display: grid;
-    grid-template-columns: 80px minmax(0, 1fr) 80px;
-    align-items: center;
-    min-height: 96px;
-    padding: 12px;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 12px;
+    min-height: 88px;
+    padding: 12px 16px;
   }
 
   .brand {
-    grid-column: 2;
-    justify-self: center;
+    grid-column: 1;
+    justify-self: start;
     gap: 10px;
-    width: 100%;
+    width: auto;
     max-width: 100%;
-    min-width: 0;
+    text-align: left;
   }
 
   .header-badge {
-    width: 52px;
-    max-height: 66px;
+    width: 48px;
+    max-height: 62px;
   }
 
   .company-name {
-    font-size: clamp(1.05rem, 3.5vw, 1.75rem);
+    max-width: 310px;
+    font-size: clamp(0.95rem, 3.6vw, 1.3rem);
     line-height: 1.05;
+    text-align: left;
   }
 
   .nav-toggle {
     position: static;
-    grid-column: 3;
-    justify-self: end;
+    grid-column: 2;
     display: inline-flex;
+    justify-self: end;
   }
 
   .primary-navigation {
+    grid-column: 1 / -1;
     display: none;
     align-items: stretch;
     flex-direction: column;
+    justify-content: flex-start;
     gap: 0;
-    padding: 8px 1rem 18px;
+    width: 100%;
+    padding: 8px 0 4px;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
   }
 
   .primary-navigation.is-open {
     display: flex;
   }
 
-  .primary-navigation > a,
-  .primary-navigation .dropdown > a {
+  .primary-navigation a {
     display: block;
-    padding: 12px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+    padding: 13px 14px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+  }
+
+  .primary-navigation a::after {
+    display: none;
   }
 
   .primary-navigation a[aria-current="page"] {
@@ -1483,57 +1523,33 @@ p {
   #contact-phone {
     min-height: 320px;
   }
-
 }
 
 @media (max-width: 520px) {
   .site-header {
-    grid-template-columns: 48px minmax(0, 1fr) 48px;
-    min-height: 88px;
-    padding-inline: 8px;
-  }
-
-   .banner-container {
-    min-height: 475px;
-    background-attachment: scroll;
-    background-position: center;
-  }
-
-   #services-overview .tabs {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    width: 100%;
-    gap: 10px;
-  }
-
-  #services-overview .tab-button {
-    width: 100%;
-    min-width: 0;
-    min-height: 56px;
-    padding: 12px 8px;
-    font-size: 0.9rem;
+    padding-inline: 10px;
   }
 
   .brand {
-    gap: 7px;
+    gap: 8px;
   }
 
   .header-badge {
-    width: 38px;
+    width: 40px;
     max-height: 52px;
   }
 
   .company-name {
-    font-size: clamp(0.8rem, 3.6vw, 1.1rem);
+    max-width: 215px;
+    font-size: clamp(0.82rem, 3.7vw, 1.05rem);
     line-height: 1.05;
-    letter-spacing: 0.01em;
+    text-align: left;
   }
 
   .nav-toggle {
-    width: 42px;
-    height: 42px;
+    width: 43px;
+    height: 43px;
     padding: 0;
-    justify-content: center;
   }
 
   .menu-label,
@@ -1544,9 +1560,9 @@ p {
     margin: -1px;
     padding: 0;
     overflow: hidden;
+    border: 0;
     clip: rect(0, 0, 0, 0);
     white-space: nowrap;
-    border: 0;
   }
 
   .contact-actions {
@@ -1562,8 +1578,6 @@ p {
   .contact-image-wrapper::before {
     right: -8px;
   }
-
-
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -1598,6 +1612,342 @@ p {
 }
 
 @media (max-width: 520px) {
+  .affiliate-marquee .affiliate-slide {
+    flex: 0 0 135px;
+    width: 135px;
+    height: 110px;
+  }
+
+  .affiliate-marquee .affiliate-slide img {
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: 78px;
+  }
+}
+
+
+/* ======================================================
+   MOBILE LAYOUT
+   Desktop unified header remains unchanged
+====================================================== */
+
+@media (max-width: 900px) {
+  /* Centered mobile header */
+
+  .site-header {
+    display: grid;
+    grid-template-columns: 64px minmax(0, 1fr) 64px;
+    align-items: center;
+    gap: 10px;
+    min-height: 96px;
+    padding: 12px 16px;
+  }
+
+  .brand {
+    grid-column: 2;
+    justify-self: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    text-align: center;
+  }
+
+  .header-badge {
+    flex: 0 0 auto;
+    width: 52px;
+    max-height: 66px;
+    object-fit: contain;
+  }
+
+  .company-name {
+    max-width: 310px;
+    color: var(--white);
+    font-size: clamp(1rem, 3.5vw, 1.5rem);
+    line-height: 1.05;
+    text-align: center;
+  }
+
+  /* Hamburger button */
+
+  .nav-toggle {
+    position: static;
+    grid-column: 3;
+    justify-self: end;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Collapsed mobile navigation */
+
+  .primary-navigation {
+    grid-column: 1 / -1;
+    display: none;
+    align-items: stretch;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 0;
+    width: 100%;
+    min-height: 0;
+    margin: 0;
+    padding: 8px 0 4px;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    background: transparent;
+  }
+
+  .primary-navigation.is-open {
+    display: flex;
+  }
+
+  .primary-navigation a {
+    display: block;
+    width: 100%;
+    padding: 13px 14px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+    text-align: left;
+  }
+
+  .primary-navigation a::after {
+    display: none;
+  }
+
+  .primary-navigation a[aria-current="page"] {
+    box-shadow: inset 4px 0 var(--gold);
+  }
+
+  /* Mobile dropdown navigation */
+
+  .dropdown-content {
+    position: static;
+    display: block;
+    margin: 0 0 4px 16px;
+    padding: 0;
+    background: transparent;
+    box-shadow: none;
+  }
+
+  .dropdown-content a {
+    padding: 9px 12px;
+    color: #dce5ff;
+    font-size: 0.92rem;
+  }
+
+  /* Contact page */
+
+  .contact-hero {
+    min-height: 450px;
+    padding: 60px 0;
+  }
+
+  .contact-hero-background {
+    inset: -12%;
+  }
+
+  .contact-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .contact-image-wrapper {
+    max-width: 620px;
+    margin-inline: auto;
+  }
+
+  #contact-phone {
+    min-height: 320px;
+  }
+
+  /* Employment opportunities */
+
+  .opportunity-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .opportunity-card {
+    width: min(100%, 620px);
+    margin-inline: auto;
+  }
+
+  /* What We Do section */
+
+  #services-overview {
+    min-height: 680px;
+    padding: 55px 0;
+  }
+
+  #services-overview .tabs {
+    margin-block: 25px;
+  }
+
+  .tab-content {
+    min-height: 300px;
+    padding: 35px 24px;
+  }
+
+  /* Affiliate conveyor */
+
+  .affiliate-marquee .affiliate-slide {
+    flex: 0 0 160px;
+    width: 160px;
+    height: 125px;
+    padding: 10px;
+  }
+
+  .affiliate-marquee .affiliate-slide img {
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: 90px;
+  }
+}
+
+@media (max-width: 520px) {
+  /* Smaller centered header */
+
+  .site-header {
+    grid-template-columns: 48px minmax(0, 1fr) 48px;
+    gap: 7px;
+    min-height: 88px;
+    padding: 10px 8px;
+  }
+
+  .brand {
+    grid-column: 2;
+    justify-self: center;
+    justify-content: center;
+    gap: 7px;
+    width: 100%;
+    min-width: 0;
+  }
+
+  .header-badge {
+    width: 38px;
+    max-height: 52px;
+  }
+
+  .company-name {
+    max-width: 215px;
+    font-size: clamp(0.8rem, 3.6vw, 1.1rem);
+    line-height: 1.05;
+    letter-spacing: 0.01em;
+    text-align: center;
+  }
+
+  .nav-toggle {
+    grid-column: 3;
+    width: 42px;
+    height: 42px;
+    padding: 0;
+  }
+
+  .menu-label,
+  .nav-toggle > span:last-child {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    border: 0;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+  }
+
+  /* Mobile hero */
+
+  .banner-container {
+    min-height: 475px;
+    background-attachment: scroll;
+    background-position: center;
+  }
+
+  /* Two-column What We Do buttons */
+
+  #services-overview .tabs {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+    width: 100%;
+  }
+
+  #services-overview .tab-button {
+    width: 100%;
+    min-width: 0;
+    min-height: 56px;
+    padding: 12px 8px;
+    font-size: 0.9rem;
+  }
+
+  .tab-content {
+    min-height: 300px;
+    padding: 30px 20px;
+  }
+
+  /* Contact page */
+
+  .contact-actions {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .contact-actions .button {
+    width: 100%;
+  }
+
+  .contact-details li {
+    grid-template-columns: 1fr;
+    gap: 2px;
+  }
+
+  .contact-image-wrapper::before {
+    right: -8px;
+  }
+
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+
+  .consultation-form {
+    padding: 25px 20px;
+  }
+
+  .consultation-submit {
+    width: 100%;
+  }
+
+  /* Employment and application sections */
+
+  .application-buttons {
+    align-items: stretch;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .application-buttons .button {
+    width: 100%;
+  }
+
+  .opportunity-card {
+    padding: 28px 22px;
+  }
+
+  .opportunity-card h3 {
+    max-width: 75%;
+  }
+
+  .opportunity-card .button {
+    width: 100%;
+    text-align: center;
+  }
+
+  /* Smaller affiliate logos */
+
+  .affiliate-marquee {
+    width: calc(100% - 24px);
+  }
+
   .affiliate-marquee .affiliate-slide {
     flex: 0 0 135px;
     width: 135px;
